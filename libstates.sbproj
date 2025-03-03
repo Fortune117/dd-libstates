@@ -1,8 +1,8 @@
 {
-  "Title": "State Machines",
+  "Title": "DD State Machines",
   "Type": "library",
-  "Org": "facepunch",
-  "Ident": "libstates",
+  "Org": "fdd",
+  "Ident": "dd_libstates",
   "Schema": 1,
   "IncludeSourceFiles": false,
   "Resources": null,
