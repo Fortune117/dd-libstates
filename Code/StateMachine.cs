@@ -158,6 +158,28 @@ public sealed class StateMachineComponent : Component
 		InvokeSafe( current.OnEnterState );
 	}
 
+	[Rpc.Broadcast( NetFlags.Reliable | NetFlags.OwnerOnly )]
+	public void ForceReturnToInitialState()
+	{
+		if (InitialState is null)
+		{
+			Log.Warning("Tried to return to Initial state but there is no initial state!");
+			return;
+		}
+
+		//we're already in this state!
+		if (CurrentState == InitialState)
+			return;
+		
+		InvokeSafe( CurrentState?.OnLeaveState );
+
+		CurrentState = InitialState;
+		StateTime = 0f;
+
+		CurrentState.Entered();
+		InvokeSafe( CurrentState.OnEnterState );
+	}
+
 	public State AddState()
 	{
 		var state = new State( this, _nextId++ );

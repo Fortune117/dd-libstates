@@ -334,7 +334,7 @@ public class StateMachineView : GraphicsView
 
 		if ( _lastEditName is not null )
 		{
-			StateMachine.Scene.EditLog( _lastEditName, StateMachine );
+			StateMachine.Scene.Editor.UndoScope( _lastEditName );
 			PushHistoryInternal( _lastEditName );
 
 			_lastEditName = null;
